@@ -1,7 +1,7 @@
 import Scraper from "../scraper/scraper.js";
 import Parser from "../parser/parser.js";
 
-class xtremeController{
+class XtremeController{
     constructor (){
         this.scraper = new Scraper();
         this.parser = null;
@@ -23,4 +23,4 @@ class xtremeController{
     }
 }
 
-export default xtremeController;
+export default XtremeController;
