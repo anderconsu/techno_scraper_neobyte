@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 
-class Scraper{
+class XtremScraper{
     constructor(headless = true){
         this.browser = null;
         this.page = null;
@@ -16,12 +16,11 @@ class Scraper{
         await this.browser.close();
     }
     scrap = async (query,page) => {
-        this.baseURL.searchParams.set("k", query);
-        this.baseURL.searchParams.set("page", page);
+        this.baseURL.searchParams.set("mot_q", query);
         const url = this.baseURL.toString();
         await this.page.goto(url);
         const content = await this.page.content();
-        //await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise(resolve => setTimeout(resolve, 15000));
         return content;
     }
     multiScrap = async (query, pages) => {
@@ -34,4 +33,4 @@ class Scraper{
 
 }
 
-export default Scraper;
+export default XtremScrapertremScraper;

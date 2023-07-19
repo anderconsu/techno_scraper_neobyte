@@ -1,9 +1,9 @@
-import Scraper from "../scraper/scraper.js";
-import Parser from "../parser/parser.js";
+import XtremScraper from "../scraper/xtremescraper.js";
+import XtremParser from "../parser/xtremeParser.js";
 
 class xtremeController{
     constructor (){
-        this.scraper = new Scraper();
+        this.scraper = new XtremScraper();
         this.parser = null;
     }
 
@@ -11,9 +11,9 @@ class xtremeController{
         await this.scraper.init();
     }
 
-    getData = async (query, pages) => {
-        const content = await this.scraper.multiScrap(query, pages);
-        this.parser = new Parser(content);
+    getData = async (query) => {
+        const content = await this.scraper.scrap(query);
+        this.parser = new XtremParser(content);
         const cards = this.parser.getCardsArray();
         this.close();
         return cards;
