@@ -5,7 +5,7 @@ class XtremScraper{
         this.browser = null;
         this.page = null;
         this.headless = headless;
-        this.baseURL = new URL("https://xtremmedia.com/");
+        this.baseURL = new URL("https://www.neobyte.es/buscador");
     }
     
     init = async () => {
@@ -16,7 +16,7 @@ class XtremScraper{
         await this.browser.close();
     }
     scrap = async (query) => {
-        this.baseURL.searchParams.set("mot_q", query);
+        this.baseURL.searchParams.set("s", query);
         const url = this.baseURL.toString();
         await this.page.goto(url);
         const content = await this.page.content();

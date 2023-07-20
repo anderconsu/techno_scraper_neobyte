@@ -15,7 +15,7 @@ app.get('/', async (req, res) => {
     res.send(content);
     }
 );
-app.get('/xtrem', async (req, res) => {
+app.get('/neo', async (req, res) => {
     const xtremController = new XtremController(false);
     await xtremController.init();
     const content = await xtremController.getData(req.query.search);

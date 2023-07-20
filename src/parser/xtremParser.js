@@ -6,19 +6,19 @@ class XtremParser {
         this.dom = new JSDOM(this.html);
     }
     getCards = () => {
-        return this.dom.window.document.querySelectorAll("x-grid-list__item");
+        return this.dom.window.document.querySelectorAll(".product-miniature");
     }
     getTitle = (card) => {
-        return card.querySelector("x-mot-result").textContent.trim();
+        return card.querySelector(".product-title").textContent.trim();
     }
     getPrice = (card) => {
-        return card.querySelector("x-mot-result-price_").textContent.trim();
+        return card.querySelector(".product-price").textContent.trim();
     }
     getImage = (card) => {
-        return card.querySelector("x-result-picture-image").getAttribute("src");
+        return card.querySelector(".lazy-product-image").getAttribute("src");
     }
     getUrl = (card) => {
-        return card.querySelector("x-result-link").getAttribute("href");
+        return card.querySelector(".product-thumbnail").getAttribute("href");
     }
     getCard = (card) => {
         return {
@@ -34,8 +34,7 @@ class XtremParser {
         const cardsArray = [];
         console.log(cards.length);
         for(let card of cards){
-            try{
-                console.log(card);
+            try{    
                 cardsArray.push(this.getCard(card));
             }
             catch(e){
