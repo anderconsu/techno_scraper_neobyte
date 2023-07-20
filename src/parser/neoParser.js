@@ -15,7 +15,7 @@ class NeoParser {
         return card.querySelector(".product-price").textContent.trim();
     }
     getImage = (card) => {
-        return card.querySelector(".lazy-product-image").getAttribute("src");
+        return card.querySelector(".img-fluid").getAttribute("data-src");
     }
     getUrl = (card) => {
         return card.querySelector(".product-thumbnail").getAttribute("href");

@@ -10,7 +10,7 @@ describe("Scraper", () => {
         await scraper.close();
     });
     it("should return a string", async () => {
-        let query = "iphone";
+        let query = "disco";
         const content = await scraper.scrap(query);
         expect(content).toContain("Neobyte");
     }, 30000);
