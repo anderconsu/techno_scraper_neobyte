@@ -31,7 +31,7 @@ app.post('/scrap', async (req, res) => {
     }
 );
 app.get('/neo', async (req, res) => {
-    const neoController = new NeoController(false);
+    const neoController = new NeoController();
     await neoController.init();
     const content = await neoController.getData(req.query.search);
     res.send(content);
