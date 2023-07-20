@@ -32,7 +32,6 @@ class NeoParser {
     getCardsArray = () => {
         const cards = this.getCards();
         const cardsArray = [];
-        console.log(cards.length);
         for(let card of cards){
             try{    
                 cardsArray.push(this.getCard(card));

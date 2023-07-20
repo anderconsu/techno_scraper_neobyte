@@ -12,7 +12,7 @@ class NeoController{
     }
 
     getData = async (query) => {
-        const content = await this.scraper.scrap(query);
+        const content = await this.scraper.multiScrap(query);
         this.parser = new NeoParser(content);
         const cards = this.parser.getCardsArray();
         this.close();

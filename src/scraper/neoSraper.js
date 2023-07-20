@@ -1,4 +1,6 @@
 import puppeteer from "puppeteer";
+import {JSDOM} from 'jsdom';
+
 
 class NeoScraper{
     constructor(headless = true){
@@ -15,12 +17,24 @@ class NeoScraper{
     close = async () => {
         await this.browser.close();
     }
-    scrap = async (query) => {
+    scrap = async (query, page = "1") => {
         this.baseURL.searchParams.set("s", query);
+        this.baseURL.searchParams.set("page", page);
         const url = this.baseURL.toString();
         await this.page.goto(url);
         const content = await this.page.content();
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        //await new Promise(resolve => setTimeout(resolve, 5000));
+        return content;
+    }
+    multiScrap = async (query) => {
+        let content = "";
+        content = await this.scrap(query, "1")
+        let dom = new JSDOM(content);
+        let num = dom.window.document.querySelectorAll(".page-list li a");
+        num = parseInt(num[num.length - 2].textContent)
+        for(let i = 2; i <= num; i++){
+            content += await this.scrap(query, i);
+        }
         return content;
     }
     
