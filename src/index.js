@@ -1,7 +1,7 @@
 import express from 'express';
 
 import AmazonController from './controllers/amazonController.js';
-import XtremController from './controllers/xtremController.js';
+import NeoController from './controllers/neoController.js';
 
 const app = express();
 
@@ -16,9 +16,9 @@ app.get('/', async (req, res) => {
     }
 );
 app.get('/neo', async (req, res) => {
-    const xtremController = new XtremController(false);
-    await xtremController.init();
-    const content = await xtremController.getData(req.query.search);
+    const neoController = new NeoController(false);
+    await neoController.init();
+    const content = await neoController.getData(req.query.search);
     res.send(content);
 })
 app.listen(3003, () => {
