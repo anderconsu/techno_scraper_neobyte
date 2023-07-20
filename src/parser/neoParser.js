@@ -32,12 +32,14 @@ class NeoParser {
     getCardsArray = () => {
         const cards = this.getCards();
         const cardsArray = [];
-        for(let card of cards){
-            try{    
-                cardsArray.push(this.getCard(card));
-            }
-            catch(e){
-                console.log(e);
+        if (cards.length > 0){
+            for(let card of cards){
+                try{    
+                    cardsArray.push(this.getCard(card));
+                }
+                catch(e){
+                    console.log(e);
+                }
             }
         }
         return cardsArray;

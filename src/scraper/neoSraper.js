@@ -31,9 +31,11 @@ class NeoScraper{
         content = await this.scrap(query, "1")
         let dom = new JSDOM(content);
         let num = dom.window.document.querySelectorAll(".page-list li a");
-        num = parseInt(num[num.length - 2].textContent)
-        for(let i = 2; i <= num; i++){
-            content += await this.scrap(query, i);
+        if (num.length > 0){
+            num = parseInt(num[num.length - 2].textContent)
+            for(let i = 2; i <= num; i++){
+                content += await this.scrap(query, i);
+            }
         }
         return content;
     }
