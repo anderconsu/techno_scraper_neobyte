@@ -1,6 +1,5 @@
 import XtremScraper from "../scraper/xtremscraper.js";
 import XtremParser from "../parser/xtremParser.js";
-import fs from "fs";
 
 class XtremController{
     constructor (headless = true){
@@ -14,7 +13,6 @@ class XtremController{
 
     getData = async (query) => {
         const content = await this.scraper.scrap(query);
-        fs.writeFileSync("./src/scraper/content.txt", content);
         this.parser = new XtremParser(content);
         const cards = this.parser.getCardsArray();
         this.close();
