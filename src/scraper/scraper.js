@@ -9,7 +9,12 @@ class Scraper{
     }
     
     init = async () => {
-        this.browser = await puppeteer.launch({headless: this.headless});
+        this.browser = await puppeteer.launch(
+        {
+            headless: this.headless,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+
+        });
         this.page = await this.browser.newPage();
     }
     close = async () => {
@@ -20,6 +25,7 @@ class Scraper{
         this.baseURL.searchParams.set("page", page);
         const url = this.baseURL.toString();
         await this.page.goto(url);
+        await this.page.waitForSelector(".s-card-container");
         const content = await this.page.content();
         //await new Promise(resolve => setTimeout(resolve, 5000));
         return content;
