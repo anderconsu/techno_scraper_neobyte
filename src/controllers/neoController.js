@@ -1,5 +1,6 @@
 import NeoScraper from "../scraper/neoSraper.js";
 import NeoParser from "../parser/neoParser.js";
+import Producto from "../models/producto.js";
 
 class NeoController{
     constructor (headless = true){
@@ -18,6 +19,21 @@ class NeoController{
         this.close();
         return cards;
     }
+
+    saveData = async (query,cards) => {
+        for(let card of cards){
+            try{
+                card.shop = "neobyte"; 
+                card.query = query; 
+                const producto = new Producto(card);
+                await producto.save();
+            }
+            catch(e){
+                console.log(e);
+            }
+        }
+    }
+
     close = async () => {
         await this.scraper.close();
     }
