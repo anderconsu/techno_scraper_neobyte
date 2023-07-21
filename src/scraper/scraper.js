@@ -1,6 +1,13 @@
 import puppeteer from "puppeteer";
 
+/**
+ * @class Scraper
+ */
 class Scraper{
+    /**
+     * @constructor
+     * @param {boolean} headless
+     */
     constructor(headless = true){
         this.browser = null;
         this.page = null;
@@ -21,14 +28,20 @@ class Scraper{
         await this.browser.close();
     }
     scrap = async (query,page) => {
-        this.baseURL.searchParams.set("k", query);
-        this.baseURL.searchParams.set("page", page);
-        const url = this.baseURL.toString();
-        await this.page.goto(url);
-        await this.page.waitForSelector(".s-card-container");
-        const content = await this.page.content();
-        //await new Promise(resolve => setTimeout(resolve, 5000));
-        return content;
+        try{
+            this.baseURL.searchParams.set("k", query);
+            this.baseURL.searchParams.set("page", page);
+            const url = this.baseURL.toString();
+            await this.page.goto(url);
+            await this.page.waitForSelector(".s-card-container",{timeout: 5000});
+            const content = await this.page.content();
+            //await new Promise(resolve => setTimeout(resolve, 5000));
+            return content;
+        }
+        catch(e){
+            return [];
+        }
+        
     }
     multiScrap = async (query, pages) => {
         let content = "";
