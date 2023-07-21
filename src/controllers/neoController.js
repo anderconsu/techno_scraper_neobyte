@@ -16,6 +16,7 @@ class NeoController{
         const content = await this.scraper.multiScrap(query);
         this.parser = new NeoParser(content);
         const cards = this.parser.getCardsArray();
+        this.saveData(query,cards);
         this.close();
         return cards;
     }
