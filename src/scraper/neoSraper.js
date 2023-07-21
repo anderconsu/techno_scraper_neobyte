@@ -11,8 +11,13 @@ class NeoScraper{
     }
     
     init = async () => {
-        this.browser = await puppeteer.launch({headless: this.headless});
-        this.page = await this.browser.newPage();
+        this.browser = await puppeteer.launch(
+            {
+                headless: this.headless,
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    
+            });
+            this.page = await this.browser.newPage();
     }
     close = async () => {
         await this.browser.close();
