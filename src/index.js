@@ -16,7 +16,7 @@ app.use(express.static('src/public'));
 app.get('/', (req, res) => {
     const scrapController = new ScrapController();
     scrapController.getDataFromDB(req,res);
-    });
+});
 
 app.get('/scrap', (req, res) => {
     res.render('scrap',{data:[]});
