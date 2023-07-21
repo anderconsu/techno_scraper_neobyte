@@ -27,7 +27,11 @@ class NeoScraper{
         this.baseURL.searchParams.set("page", page);
         const url = this.baseURL.toString();
         await this.page.goto(url);
-        await this.page.waitForSelector(".product-miniature");
+        try {
+            await this.page.waitForSelector(".product-miniature");
+        }catch(e){
+            console.log(e);
+        }
         const content = await this.page.content();
         //await new Promise(resolve => setTimeout(resolve, 5000));
         return content;

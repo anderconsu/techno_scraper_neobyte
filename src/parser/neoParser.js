@@ -12,7 +12,7 @@ class NeoParser {
         return card.querySelector(".product-title").textContent.trim();
     }
     getPrice = (card) => {
-        return card.querySelector(".product-price").textContent.trim().split(" ")[0];
+        return card.querySelector(".product-price").textContent.replace("€", "").trim();
     }
     getImage = (card) => {
         return card.querySelector(".img-fluid").getAttribute("data-src");
